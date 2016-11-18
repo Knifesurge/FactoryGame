@@ -19,7 +19,7 @@ public class FactoryGame implements Runnable{
 	public static final int WIDTH = 1080;
 	public static final int HEIGHT = WIDTH / 16 * 9;
 	
-	private Thread thread;
+	private static Thread thread;
 	public static Handler handler;
 	public static Player player;
 	
@@ -52,12 +52,15 @@ public class FactoryGame implements Runnable{
         	thread.start();
 	}
 	
-	public synchronized void stop()
+	public synchronized static void stop()
 	{
 		try
 		{
+			destroy();
 			thread.join();
+			System.exit(0);
 		} catch (InterruptedException e) {e.printStackTrace();}
+		
 	}
 	
 	public void run()
@@ -106,7 +109,6 @@ public class FactoryGame implements Runnable{
 			}
 			Display.update();
 		}
-		destroy();
 	}
 	
 	public void tick()
@@ -114,7 +116,7 @@ public class FactoryGame implements Runnable{
 		handler.tick();
 	}
 	
-	private void destroy()
+	private static void destroy()
 	{
 		Display.destroy();
 	}

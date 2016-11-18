@@ -201,6 +201,9 @@ public final class KeyInputHandler extends GLFWKeyCallback{
 					System.out.println("D (" + key + ")");
 					player.destX += movementSpeed;
 					break;
+				case KEY_ESCAPE:
+					System.out.println("Exiting...");
+					FactoryGame.stop();
 			}
 		}
 		if(action == KEY_REPEAT)
